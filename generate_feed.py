@@ -110,28 +110,19 @@ def strip_html(text):
 # Feed assembly
 # ---------------------------------------------------------------------------
 
-def build_item_title(post, severity_map):
-    title = post.get("title", "Status Update")
-    latest = post.get("latest_update") or {}
-    severity_id = latest.get("severity_id", "")
-    severity_name = severity_map.get(severity_id, "")
-    if severity_name and severity_name.lower() not in ("all good", ""):
-        return f"[{severity_name.title()}] {title}"
-    return title
+def build_update_title(post_title, update, status_map):
+    status_name = status_map.get(update.get("status_id", ""), "")
+    if status_name:
+        return f"[{status_name.title()}] {post_title}"
+    return post_title
 
 
-def build_item_description(post, status_map, severity_map, service_map):
-    """Build a plain-text description for an RSS item."""
+def build_update_description(update, severity_map, service_map):
+    """Build a plain-text description for a single update RSS item."""
     lines = []
 
-    # Status
-    latest = post.get("latest_update") or {}
-    status_name = status_map.get(latest.get("status_id", ""), "")
-    if status_name:
-        lines.append(f"Status: {status_name.title()}")
-
     # Affected services with per-service impact severity
-    impacts = latest.get("impacts") or []
+    impacts = update.get("impacts") or []
     if impacts:
         affected = []
         for imp in impacts:
@@ -139,19 +130,11 @@ def build_item_description(post, status_map, severity_map, service_map):
             sev = severity_map.get(imp.get("severity_id", ""), "")
             affected.append(f"{svc} ({sev})" if sev else svc)
         lines.append(f"Affected: {', '.join(affected)}")
-
-    lines.append("")  # blank line before updates
-
-    # All updates in chronological order
-    updates = sorted(post.get("updates") or [], key=lambda u: u.get("reported_at", 0))
-    for upd in updates:
-        ts = ms_to_human(upd.get("reported_at"))
-        msg = strip_html(upd.get("message", ""))
-        if ts:
-            lines.append(f"[{ts}]")
-        if msg:
-            lines.append(msg)
         lines.append("")
+
+    msg = strip_html(update.get("message", ""))
+    if msg:
+        lines.append(msg)
 
     return "\n".join(lines).strip()
 
@@ -192,17 +175,20 @@ def generate_rss(layout_data, posts, post_enums, services):
 
     for post in posts:
         post_id = post.get("id", "")
-        item = SubElement(channel, "item")
-        SubElement(item, "title").text = build_item_title(post, severity_map)
-        SubElement(item, "link").text = (
-            f"https://status.motherduck.com/posts/details/{post_id}"
-        )
-        SubElement(item, "guid").text = post_id
-        SubElement(item, "description").text = build_item_description(
-            post, status_map, impact_severity_map, service_map
-        )
-        pub_ms = post.get("first_update_at") or post.get("last_update_at")
-        SubElement(item, "pubDate").text = ms_to_rfc2822(pub_ms)
+        post_title = post.get("title", "Status Update")
+        link = f"https://status.motherduck.com/posts/details/{post_id}"
+        updates = sorted(post.get("updates") or [], key=lambda u: u.get("reported_at", 0))
+        for upd in updates:
+            reported_ms = upd.get("reported_at") or 0
+            epoch_seconds = int(reported_ms / 1000)
+            item = SubElement(channel, "item")
+            SubElement(item, "title").text = build_update_title(post_title, upd, status_map)
+            SubElement(item, "link").text = link
+            SubElement(item, "guid").text = f"{post_id}-{epoch_seconds}"
+            SubElement(item, "description").text = build_update_description(
+                upd, impact_severity_map, service_map
+            )
+            SubElement(item, "pubDate").text = ms_to_rfc2822(reported_ms)
 
     if not posts:
         item = SubElement(channel, "item")
