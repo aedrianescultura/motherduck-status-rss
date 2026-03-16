@@ -168,10 +168,10 @@ def generate_rss(layout_data, posts, post_enums, services):
     SubElement(channel, "link").text = "https://status.motherduck.com"
     SubElement(channel, "description").text = global_headline
     SubElement(channel, "language").text = "en"
-    SubElement(channel, "lastBuildDate").text = format_datetime(
-        datetime.datetime.now(datetime.timezone.utc)
-    )
+    last_build_date = SubElement(channel, "lastBuildDate")  # filled in after items
     SubElement(channel, "ttl").text = "15"
+
+    max_pub_ms = 0
 
     for post in posts:
         post_id = post.get("id", "")
@@ -189,6 +189,8 @@ def generate_rss(layout_data, posts, post_enums, services):
                 upd, impact_severity_map, service_map
             )
             SubElement(item, "pubDate").text = ms_to_rfc2822(reported_ms)
+            if reported_ms > max_pub_ms:
+                max_pub_ms = reported_ms
 
     if not posts:
         item = SubElement(channel, "item")
@@ -197,9 +199,14 @@ def generate_rss(layout_data, posts, post_enums, services):
         today = datetime.date.today().isoformat()
         SubElement(item, "guid").text = f"motherduck-no-incidents-{today}"
         SubElement(item, "description").text = "No incidents reported in the past 3 months."
-        SubElement(item, "pubDate").text = format_datetime(
-            datetime.datetime.now(datetime.timezone.utc)
+        # Use midnight UTC of today so pubDate is stable across runs on the same day
+        midnight = datetime.datetime.combine(
+            datetime.date.today(), datetime.time.min, tzinfo=datetime.timezone.utc
         )
+        max_pub_ms = int(midnight.timestamp() * 1000)
+        SubElement(item, "pubDate").text = ms_to_rfc2822(max_pub_ms)
+
+    last_build_date.text = ms_to_rfc2822(max_pub_ms)
 
     xml_bytes = tostring(rss, encoding="unicode")
     dom = minidom.parseString(f'<?xml version="1.0" encoding="UTF-8"?>{xml_bytes}')
