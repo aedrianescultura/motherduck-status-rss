@@ -5,7 +5,7 @@
     <link>https://status.motherduck.com</link>
     <description>Everything is paddling smoothly</description>
     <language>en</language>
-    <lastBuildDate>Fri, 06 Mar 2026 00:29:34 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Mar 2026 14:32:20 +0000</lastBuildDate>
     <ttl>15</ttl>
     <item>
       <title>[Detected] users unable to save new dives; some existing dives also affected</title>
@@ -42,6 +42,24 @@ We believe we have identified the root cause and are working to validate a fix. 
 
 This incident has been resolved.</description>
       <pubDate>Fri, 06 Mar 2026 00:29:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>[Investigating] MotherDuck Remote MCP Server is currently unavailable</title>
+      <link>https://status.motherduck.com/posts/details/P9BOS1P</link>
+      <guid>P9BOS1P-1774361564</guid>
+      <description>Affected: MotherDuck App
+
+The MotherDuck remote MCP server is currently unavailable, we are investigating the issue.</description>
+      <pubDate>Tue, 24 Mar 2026 14:12:44 +0000</pubDate>
+    </item>
+    <item>
+      <title>[Resolved] MotherDuck Remote MCP Server is currently unavailable</title>
+      <link>https://status.motherduck.com/posts/details/P9BOS1P</link>
+      <guid>P9BOS1P-1774362740</guid>
+      <description>Affected: MotherDuck App
+
+This issue has been resolved, the MCP server is available.</description>
+      <pubDate>Tue, 24 Mar 2026 14:32:20 +0000</pubDate>
     </item>
     <item>
       <title>[Resolved] DuckLake Snapshot Deletions</title>
