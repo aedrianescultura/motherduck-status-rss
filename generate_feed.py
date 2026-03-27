@@ -160,13 +160,23 @@ def generate_rss(layout_data, posts, post_enums, services):
 
     service_map = build_lookup(services.get("services", []))
 
+    # Determine channel description: list active incident titles if any, else the global headline
+    active_titles = []
+    for post in posts:
+        updates = sorted(post.get("updates") or [], key=lambda u: u.get("reported_at", 0))
+        if updates:
+            latest_status = status_map.get(updates[-1].get("status_id", ""), "").lower()
+            if latest_status != "resolved":
+                active_titles.append(post.get("title", "Ongoing incident"))
+    channel_description = "; ".join(active_titles) if active_titles else global_headline
+
     # Build RSS
     rss = Element("rss", version="2.0")
     channel = SubElement(rss, "channel")
 
     SubElement(channel, "title").text = "MotherDuck Status"
     SubElement(channel, "link").text = "https://status.motherduck.com"
-    SubElement(channel, "description").text = global_headline
+    SubElement(channel, "description").text = channel_description
     SubElement(channel, "language").text = "en"
     last_build_date = SubElement(channel, "lastBuildDate")  # filled in after items
     SubElement(channel, "ttl").text = "15"
