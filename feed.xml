@@ -5,8 +5,31 @@
     <link>https://status.motherduck.com</link>
     <description>Everything is paddling smoothly</description>
     <language>en</language>
-    <lastBuildDate>Tue, 24 Mar 2026 14:32:20 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Apr 2026 07:43:51 +0000</lastBuildDate>
     <ttl>15</ttl>
+    <item>
+      <title>[Investigating] Some databases are failing to load</title>
+      <link>https://status.motherduck.com/posts/details/PEOX9ST</link>
+      <guid>PEOX9ST-1775195100</guid>
+      <description>Some users are experiencing a degradation of service because a subset of databases are failing to load. We are investigating.</description>
+      <pubDate>Fri, 03 Apr 2026 05:45:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>[Investigating] Some databases are failing to load</title>
+      <link>https://status.motherduck.com/posts/details/PEOX9ST</link>
+      <guid>PEOX9ST-1775199600</guid>
+      <description>We have identified the root cause and are working on implementing a fix</description>
+      <pubDate>Fri, 03 Apr 2026 07:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>[Resolved] Some databases are failing to load</title>
+      <link>https://status.motherduck.com/posts/details/PEOX9ST</link>
+      <guid>PEOX9ST-1775202231</guid>
+      <description>Affected: MotherDuck App
+
+Databases are loading as expected after deploying the fix. We are actively monitoring the health of the service.</description>
+      <pubDate>Fri, 03 Apr 2026 07:43:51 +0000</pubDate>
+    </item>
     <item>
       <title>[Detected] users unable to save new dives; some existing dives also affected</title>
       <link>https://status.motherduck.com/posts/details/PZBCJER</link>
