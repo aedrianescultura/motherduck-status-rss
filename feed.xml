@@ -113,15 +113,5 @@ The MotherDuck remote MCP server is currently unavailable, we are investigating 
 This issue has been resolved, the MCP server is available.</description>
       <pubDate>Tue, 24 Mar 2026 14:32:20 +0000</pubDate>
     </item>
-    <item>
-      <title>[Resolved] DuckLake Snapshot Deletions</title>
-      <link>https://status.motherduck.com/posts/details/PWQOZNB</link>
-      <guid>PWQOZNB-1770919381</guid>
-      <description>Affected: MotherDuck App
-
-A bug was introduced during our recent production release at 7:24 UTC on Thursday, February 12 that has resulted in the premature deletion of ducklake snapshots in MotherDuck-managed ducklake S3 Buckets.
-We have identified the root cause and deployed a patch at approx 17:50 UTC.</description>
-      <pubDate>Thu, 12 Feb 2026 18:03:01 +0000</pubDate>
-    </item>
   </channel>
 </rss>
