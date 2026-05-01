@@ -3,10 +3,30 @@
   <channel>
     <title>MotherDuck Status</title>
     <link>https://status.motherduck.com</link>
-    <description>Everything is paddling smoothly</description>
+    <description>Degraded experience using Dives</description>
     <language>en</language>
-    <lastBuildDate>Thu, 30 Apr 2026 14:15:11 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 May 2026 21:40:00 +0000</lastBuildDate>
     <ttl>15</ttl>
+    <item>
+      <title>[Detected] Degraded experience using Dives</title>
+      <link>https://status.motherduck.com/posts/details/P48P9QV</link>
+      <guid>P48P9QV-1777668600</guid>
+      <description>Affected: MotherDuck App
+
+For some customers, Dives may not load properly, with a stuck page that says "Waiting for sandbox...". This is due to a caching issue. This issue will likely disappear on its own as your browser cache invalidates naturally.
+
+But while we've fixed the issue upstream, you might encounter it...</description>
+      <pubDate>Fri, 01 May 2026 20:50:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>[Detected] Degraded experience using Dives</title>
+      <link>https://status.motherduck.com/posts/details/P48P9QV</link>
+      <guid>P48P9QV-1777671600</guid>
+      <description>Affected: MotherDuck App
+
+No new updates.</description>
+      <pubDate>Fri, 01 May 2026 21:40:00 +0000</pubDate>
+    </item>
     <item>
       <title>[Investigating] Some databases are failing to load</title>
       <link>https://status.motherduck.com/posts/details/PEOX9ST</link>
