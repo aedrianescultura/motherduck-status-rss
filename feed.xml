@@ -3,9 +3,9 @@
   <channel>
     <title>MotherDuck Status</title>
     <link>https://status.motherduck.com</link>
-    <description>Degraded experience using Dives</description>
+    <description>Everything is paddling smoothly</description>
     <language>en</language>
-    <lastBuildDate>Fri, 01 May 2026 21:40:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 02 May 2026 13:34:44 +0000</lastBuildDate>
     <ttl>15</ttl>
     <item>
       <title>[Detected] Degraded experience using Dives</title>
@@ -26,6 +26,15 @@ But while we've fixed the issue upstream, you might encounter it...</description
 
 No new updates.</description>
       <pubDate>Fri, 01 May 2026 21:40:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>[Resolved] Degraded experience using Dives</title>
+      <link>https://status.motherduck.com/posts/details/P48P9QV</link>
+      <guid>P48P9QV-1777728884</guid>
+      <description>Affected: MotherDuck App
+
+At this point, all major browsers should invalidate the old cache for the MotherDuck UI. If you are having a problem accessing your Dives, please contact us.</description>
+      <pubDate>Sat, 02 May 2026 13:34:44 +0000</pubDate>
     </item>
     <item>
       <title>[Investigating] Some databases are failing to load</title>
